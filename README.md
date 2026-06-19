@@ -1,1 +1,85 @@
-# ontologia_culinaria
+#Contexto y motivación
+
+El ritmo de vida contemporáneo y la evolución de los hábitos de consumo han transformado de manera significativa la gestión alimentaria en el ámbito doméstico. En este contexto, la planificación culinaria diaria se enfrenta de forma recurrente a varios desafíos: el aprovechamiento ineficiente de los ingredientes disponibles, la tendencia a repetir un repertorio limitado de menús y la sobrecarga cognitiva asociada a decidir qué cocinar. Este Trabajo de Fin de Grado surge de la motivación de abordar dichas problemáticas mediante técnicas de ingeniería de datos e inteligencia artificial.
+
+Una de las motivaciones centrales del proyecto radica en optimizar el uso del inventario alimentario del hogar, permitiendo al usuario identificar recetas viables a partir de los ingredientes ya disponibles en su nevera o despensa. Este aprovechamiento más eficiente no solo puede contribuir a reducir el gasto económico, sino que también se alinea con modelos de consumo más sostenibles orientados a minimizar el desperdicio alimentario.
+
+Junto a ello, el proyecto persigue fomentar una mayor diversidad en la selección de recetas. Ante catálogos masivos de información culinaria, los usuarios tienden a recurrir de manera repetitiva a platos conocidos, lo que limita la variedad de la dieta y dificulta el descubrimiento de nuevas alternativas. En este sentido, un sistema de recomendación inteligente puede actuar como apoyo en la toma de decisiones, proponiendo opciones adaptadas a los recursos disponibles y reduciendo el esfuerzo asociado a la búsqueda manual.
+
+El interés de este trabajo no reside únicamente en la utilidad práctica del sistema, sino también en el reto técnico que plantea. La información culinaria disponible en la web suele presentarse en formato no estructurado, con una elevada variabilidad léxica y semántica en la forma de expresar ingredientes, cantidades y características de las recetas. Por ello, el desarrollo de un asistente de cocina de estas características requiere combinar procesos de extracción y normalización de datos, técnicas de representación semántica y estrategias de optimización capaces de operar bajo restricciones reales.
+
+De este modo, la propuesta se sitúa en la intersección entre el procesamiento del lenguaje natural, el modelado semántico y la optimización algorítmica, con el objetivo de transformar una tarea cotidiana en un proceso más eficiente, flexible y personalizado.
+
+
+#Planteamiento del problema
+
+La recomendación automática de recetas a partir de los ingredientes disponibles en un entorno doméstico constituye un problema considerablemente más complejo de lo que podría sugerir una búsqueda literal sobre una base de datos. A diferencia de otros sistemas de recuperación de información, en este dominio no basta con localizar coincidencias exactas entre una consulta y un conjunto de registros: es necesario interpretar expresiones lingüísticas heterogéneas, resolver equivalencias semánticas entre ingredientes y evaluar simultáneamente múltiples restricciones de viabilidad.
+
+Una de las principales dificultades reside en la propia naturaleza de los datos. Las recetas disponibles en la web suelen estar redactadas en lenguaje natural libre y presentan una estructura altamente variable, tanto en la forma de nombrar los ingredientes como en la inclusión de cantidades, unidades de medida, técnicas de preparación o descriptores contextuales dentro de un mismo campo textual. Esta heterogeneidad impide aplicar de manera fiable mecanismos directos de emparejamiento exacto, ya que una misma entidad culinaria puede aparecer fragmentada en numerosas variantes léxicas o morfosintácticas.
+
+A esta dificultad se añade un segundo problema: incluso si se consigue normalizar el texto y aislar correctamente los ingredientes, la recomendación no puede reducirse a una comprobación binaria de presencia o ausencia. En un contexto real, la viabilidad de una receta depende también de la posibilidad de aceptar sustituciones razonables entre ingredientes semánticamente próximos, así como de la capacidad del sistema para priorizar unas soluciones frente a otras según criterios adicionales, como el tiempo de preparación, la dificultad técnica o el perfil nutricional del plato.
+
+Por tanto, el problema abordado en este trabajo no consiste únicamente en recuperar recetas relacionadas con una lista de ingredientes, sino en construir una representación computacional del dominio culinario que permita operar con flexibilidad semántica y, sobre esa base, diseñar algoritmos capaces de explorar de forma eficiente un espacio de soluciones condicionado por restricciones múltiples y, en ocasiones, contrapuestas.
+
+Desde esta perspectiva, el reto se articula en varias decisiones técnicas interdependientes. En primer lugar, es necesario transformar un corpus web no estructurado en una base de conocimiento coherente y explotable. En segundo lugar, debe definirse una representación semántica capaz de reducir la variabilidad léxica de los ingredientes y modelar relaciones de afinidad culinaria. En tercer lugar, resulta necesario analizar qué estrategias de búsqueda y optimización permiten recomendar recetas viables bajo restricciones logísticas y nutricionales. Finalmente, también es pertinente explorar si modelos contextuales basados en Transformers pueden complementar o superar algunas de las limitaciones de los embeddings estáticos en tareas de afinidad y sustitución de ingredientes.
+
+En consecuencia, este TFG plantea el desarrollo del asistente de cocina como una investigación progresiva en la que cada fase metodológica responde a una limitación detectada en la anterior: desde la adquisición y normalización del dato, hasta la comparación de representaciones semánticas y la evaluación de distintos enfoques de optimización y modelado contextual.
+
+
+Con el fin de articular formalmente el alcance de estas metodologías, las metas generales y específicas derivadas de este planteamiento se desglosan con detalle en el Capítulo 2.
+
+#Trabajos relacionados
+
+El desarrollo de asistentes culinarios y sistemas de recomendación orientados al dominio gastronómico ha experimentado un auge notable en la última década, impulsado por la digitalización masiva de recetas y el creciente interés por la nutrición personalizada \cite{fernandez2025foodbert}. La literatura científica aborda este desafío desde tres vertientes metodológicas interconectadas: la arquitectura de los sistemas de recomendación basados en contenido, la representación semántica de ingredientes mediante espacios vectoriales latentes y la aplicación de metaheurísticas para la optimización multiobjetivo de menús.
+
+##Sistemas de Recomendación Gastronómica Basados en Contenido
+
+Los sistemas de recomendación tradicionales se han fundamentado históricamente en técnicas de filtrado colaborativo o filtrado basado en contenido. No obstante, en el ámbito de la cocina doméstica, el filtrado colaborativo presenta limitaciones severas debido al problema del arranque en frío y a la naturaleza hiperpersonalizada e impredecible de las existencias de una despensa real. 
+
+Por este motivo, las investigaciones más recientes se han desplazado hacia aproximaciones basadas puramente en el contenido de las recetas, donde el motor de búsqueda evalúa las propiedades explícitas del plato frente a las restricciones del usuario. Trabajos previos enfocan este problema mediante el uso de bases de datos relacionales estrictas o grafos de conocimiento. Si bien estos enfoques garantizan una alta fidelidad en la coincidencia exacta de términos, adolecen de una rigidez matemática que genera elevados índices de falsos negativos ante sutiles variaciones léxicas, un obstáculo que el presente trabajo mitiga mediante la flexibilidad continua de las metaheurísticas.
+
+##Modelado de Conocimiento y Representaciones Vectoriales Latentes
+
+La gestión de la heterogeneidad textual y el ruido en el lenguaje libre (v.g., unidades de medida, sinónimos o técnicas de corte) ha sido tradicionalmente abordada mediante la construcción manual de ontologías gastronómicas estructuradas. Sin embargo, el mantenimiento y la escalabilidad de estas estructuras semánticas rígidas resultan inviables ante corpus dinámicos extraídos de la web.
+
+Para superar esta barrera, la literatura moderna de Procesamiento del Lenguaje Natural (PLN) introdujo la hipótesis distributiva y los modelos de embeddings estáticos como Word2Vec, demostrando que es posible proyectar palabras en espacios vectoriales continuos de baja dimensionalidad donde la cercanía geométrica (calculada mediante la similitud del coseno) equivale a la afinidad conceptual. En el ámbito culinario, esto permite agrupar automáticamente ingredientes por familias biológicas o funcionales. 
+
+A pesar de su éxito para identificar sinónimos evidentes, la literatura reciente señala que los embeddings estáticos sufren de una falta de sensibilidad al contexto discursivo de la oración, un problema crítico cuando un ingrediente secundario o decorativo se confunde con la proteína troncal del plato. Esta limitación ha motivado la transición hacia arquitecturas basadas en \textit{Transformers} y modelos de lenguaje contextuales específicos del dominio, tales como Food-BERT, una evolución que se evalúa y discute en las fases finales de esta investigación como alternativa superior a los umbrales de sustitución estáticos.
+
+##Optimización Metaheurística y Enfoques Multiobjetivo
+
+Una vez resuelta la capa semántica, la evaluación simultánea de miles de recetas frente a múltiples restricciones (disponibilidad de insumos, cotas temporales, perfiles macro-nutricionales y niveles de dificultad) constituye un problema de optimización combinatoria de alta complejidad. 
+
+La aproximación metodológica convencional consiste en agregar linealmente todos los criterios en una única función objetivo escalar ponderada por un vector de pesos estáticos. No obstante, autores como Coello Coello y Barr argumentan que este enfoque de agregación introduce un sesgo arbitrario y destruye la naturaleza real del problema, el cual está gobernado por criterios intrínsecamente en conflicto. 
+
+Para resolver este dilema de manera eficiente sin incurrir en costes computacionales prohibitivos, la literatura avala el uso de algoritmos de Búsqueda Local Estocástica, técnicas de Simulated Annealing basadas en los equilibrios probabilísticos de Boltzmann, y estrategias de optimización multiobjetivo real apoyadas en el concepto de la dominancia de Pareto. Este TFG se posiciona en esta última frontera metodológica, evaluando comparativamente cómo operan dichas metaheurísticas stocásticas sobre espacios continuos para devolver un catálogo equilibrado de soluciones Pareto-óptimas adaptadas al hogar.
+
+#Enfoque metodológico y recorrido experimental
+
+El presente trabajo no aborda el desarrollo del asistente culinario como una implementación lineal de técnicas previamente cerradas, sino como un proceso de exploración experimental progresiva en el que cada fase metodológica surge como respuesta a las limitaciones observadas en la etapa anterior. Desde esta perspectiva, el objetivo no consiste únicamente en construir un recomendador funcional, sino en analizar qué combinación de estrategias de procesamiento del lenguaje natural, representación semántica y optimización resulta más adecuada para el dominio gastronómico.
+
+La primera fase del trabajo se centra en la construcción del corpus y en la transformación de un conjunto masivo de recetas web en una base de conocimiento estructurada. Esta etapa incluye la extracción automática de datos, la definición del modelo de información de la receta y la normalización de los ingredientes. En este punto, el problema principal no es todavía la recomendación en sí misma, sino la necesidad de disponer de datos consistentes sobre los que pueda operar cualquier algoritmo posterior. El análisis de esta fase permite comprobar que los enfoques heurísticos basados exclusivamente en reglas son útiles como línea base de limpieza, pero insuficientes para resolver de forma robusta la variabilidad léxica del dominio culinario, lo que conduce a la incorporación de un modelo de reconocimiento de entidades.
+
+Una vez consolidado un inventario canónico de ingredientes, la segunda fase aborda la representación semántica del dominio. En ella se entrenan y comparan diferentes espacios latentes con el fin de estudiar hasta qué punto capturan relaciones de proximidad culinaria útiles para la recomendación. La comparación entre Word2Vec y FastText no se plantea como un ejercicio independiente, sino como una decisión estructural del sistema: elegir la geometría semántica sobre la que se apoyarán posteriormente los algoritmos de búsqueda. Esta fase permite determinar qué modelo preserva mejor la afinidad funcional entre ingredientes y cuál resulta más adecuado para operar en escenarios de sustitución y cobertura parcial del inventario.
+
+Sobre esta base, la tercera fase del trabajo traslada la representación semántica al problema de recomendación propiamente dicho. El recorrido experimental comienza con un algoritmo baseline de coincidencia exacta que actúa como referencia determinista. Las limitaciones observadas en este enfoque, especialmente su rigidez ante sinonimias, reformulaciones y sustituciones plausibles, justifican la transición hacia estrategias de búsqueda local estocástica guiadas por similitud semántica. A partir de ahí, se comparan diferentes variantes heurísticas y distintos mecanismos de exploración del espacio de soluciones, con el propósito de analizar no solo la calidad de las recetas recomendadas, sino también la interacción entre la topología del espacio latente y el comportamiento de cada metaheurística.
+
+La cuarta fase amplía el problema desde un escenario monobjetivo hacia un marco multicriterio y multiobjetivo más próximo al uso real de un asistente de cocina. En este punto, el solapamiento de ingredientes deja de ser el único criterio relevante y pasa a combinarse con restricciones temporales, técnicas y nutricionales. En una primera aproximación, estas dimensiones se integran mediante funciones de agregación lineal. Sin embargo, dado que dicha formulación exige fijar pesos de importancia de manera previa, el trabajo evoluciona posteriormente hacia un enfoque multiobjetivo basado en la dominancia de Pareto, permitiendo recuperar un conjunto de soluciones no dominadas que reflejan compromisos diferentes entre objetivos contrapuestos.
+
+Finalmente, la última fase incorpora una exploración de modelos contextuales basados en Transformers mediante BETO. Esta línea no se introduce como un bloque aislado, sino como respuesta a una limitación detectada en las fases previas: aunque los embeddings estáticos permiten modelar cercanía semántica global entre ingredientes, presentan dificultades para captar con precisión el papel funcional de cada ingrediente dentro del contexto específico de una receta. La experimentación con BETO permite, por tanto, analizar hasta qué punto un modelo contextual puede complementar el motor principal del sistema en tareas de afinidad culinaria y validación de sustituciones.
+
+En conjunto, el recorrido del trabajo sigue una lógica encadenada: construir el dato, normalizarlo, representarlo semánticamente, explotar esa representación mediante algoritmos de recomendación y, finalmente, explorar arquitecturas contextuales como vía de mejora. Esta secuencia da coherencia al conjunto de experimentos desarrollados y constituye el hilo conductor de la investigación.
+
+Estructura del documento
+
+La memoria se organiza en seis capítulos principales, además de las conclusiones finales. Tras este capítulo introductorio, el Capítulo 2 presenta la planificación del proyecto, la distribución temporal del trabajo y la infraestructura tecnológica empleada durante el desarrollo.
+
+El Capítulo 3 describe el proceso de construcción del corpus culinario, incluyendo la extracción automatizada de recetas, la normalización de ingredientes y la consolidación de una base de conocimiento estructurada.
+ 
+A continuación, el Capítulo 4 aborda el modelado semántico del dominio mediante embeddings, comparando distintas arquitecturas con el fin de seleccionar la representación más adecuada para el sistema de recomendación.
+
+El Capítulo 5 constituye el núcleo experimental del trabajo y recoge los distintos casos de uso desarrollados, desde los enfoques basados en coincidencia exacta hasta los algoritmos de búsqueda local, la optimización multicriterio y el análisis multiobjetivo mediante frontera de Pareto. 
+
+Posteriormente, el Capítulo 6 explora el uso de modelos contextuales basados en Transformers, evaluando el potencial de BETO para tareas de afinidad culinaria y sustitución de ingredientes.
+
+Finalmente, el documento se cierra con un apartado de conclusiones en el que se sintetizan los principales resultados obtenidos, se discuten las limitaciones del trabajo y se plantean posibles líneas de mejora y continuidad futura.
