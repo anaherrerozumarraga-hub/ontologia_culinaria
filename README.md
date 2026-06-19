@@ -1,4 +1,4 @@
-#Contexto y motivación
+# Contexto y motivación
 
 El ritmo de vida contemporáneo y la evolución de los hábitos de consumo han transformado de manera significativa la gestión alimentaria en el ámbito doméstico. En este contexto, la planificación culinaria diaria se enfrenta de forma recurrente a varios desafíos: el aprovechamiento ineficiente de los ingredientes disponibles, la tendencia a repetir un repertorio limitado de menús y la sobrecarga cognitiva asociada a decidir qué cocinar. Este Trabajo de Fin de Grado surge de la motivación de abordar dichas problemáticas mediante técnicas de ingeniería de datos e inteligencia artificial.
 
@@ -11,7 +11,7 @@ El interés de este trabajo no reside únicamente en la utilidad práctica del s
 De este modo, la propuesta se sitúa en la intersección entre el procesamiento del lenguaje natural, el modelado semántico y la optimización algorítmica, con el objetivo de transformar una tarea cotidiana en un proceso más eficiente, flexible y personalizado.
 
 
-#Planteamiento del problema
+# Planteamiento del problema
 
 La recomendación automática de recetas a partir de los ingredientes disponibles en un entorno doméstico constituye un problema considerablemente más complejo de lo que podría sugerir una búsqueda literal sobre una base de datos. A diferencia de otros sistemas de recuperación de información, en este dominio no basta con localizar coincidencias exactas entre una consulta y un conjunto de registros: es necesario interpretar expresiones lingüísticas heterogéneas, resolver equivalencias semánticas entre ingredientes y evaluar simultáneamente múltiples restricciones de viabilidad.
 
@@ -28,17 +28,17 @@ En consecuencia, este TFG plantea el desarrollo del asistente de cocina como una
 
 Con el fin de articular formalmente el alcance de estas metodologías, las metas generales y específicas derivadas de este planteamiento se desglosan con detalle en el Capítulo 2.
 
-#Trabajos relacionados
+# Trabajos relacionados
 
 El desarrollo de asistentes culinarios y sistemas de recomendación orientados al dominio gastronómico ha experimentado un auge notable en la última década, impulsado por la digitalización masiva de recetas y el creciente interés por la nutrición personalizada \cite{fernandez2025foodbert}. La literatura científica aborda este desafío desde tres vertientes metodológicas interconectadas: la arquitectura de los sistemas de recomendación basados en contenido, la representación semántica de ingredientes mediante espacios vectoriales latentes y la aplicación de metaheurísticas para la optimización multiobjetivo de menús.
 
-##Sistemas de Recomendación Gastronómica Basados en Contenido
+## Sistemas de Recomendación Gastronómica Basados en Contenido
 
 Los sistemas de recomendación tradicionales se han fundamentado históricamente en técnicas de filtrado colaborativo o filtrado basado en contenido. No obstante, en el ámbito de la cocina doméstica, el filtrado colaborativo presenta limitaciones severas debido al problema del arranque en frío y a la naturaleza hiperpersonalizada e impredecible de las existencias de una despensa real. 
 
 Por este motivo, las investigaciones más recientes se han desplazado hacia aproximaciones basadas puramente en el contenido de las recetas, donde el motor de búsqueda evalúa las propiedades explícitas del plato frente a las restricciones del usuario. Trabajos previos enfocan este problema mediante el uso de bases de datos relacionales estrictas o grafos de conocimiento. Si bien estos enfoques garantizan una alta fidelidad en la coincidencia exacta de términos, adolecen de una rigidez matemática que genera elevados índices de falsos negativos ante sutiles variaciones léxicas, un obstáculo que el presente trabajo mitiga mediante la flexibilidad continua de las metaheurísticas.
 
-##Modelado de Conocimiento y Representaciones Vectoriales Latentes
+## Modelado de Conocimiento y Representaciones Vectoriales Latentes
 
 La gestión de la heterogeneidad textual y el ruido en el lenguaje libre (v.g., unidades de medida, sinónimos o técnicas de corte) ha sido tradicionalmente abordada mediante la construcción manual de ontologías gastronómicas estructuradas. Sin embargo, el mantenimiento y la escalabilidad de estas estructuras semánticas rígidas resultan inviables ante corpus dinámicos extraídos de la web.
 
@@ -46,7 +46,7 @@ Para superar esta barrera, la literatura moderna de Procesamiento del Lenguaje N
 
 A pesar de su éxito para identificar sinónimos evidentes, la literatura reciente señala que los embeddings estáticos sufren de una falta de sensibilidad al contexto discursivo de la oración, un problema crítico cuando un ingrediente secundario o decorativo se confunde con la proteína troncal del plato. Esta limitación ha motivado la transición hacia arquitecturas basadas en \textit{Transformers} y modelos de lenguaje contextuales específicos del dominio, tales como Food-BERT, una evolución que se evalúa y discute en las fases finales de esta investigación como alternativa superior a los umbrales de sustitución estáticos.
 
-##Optimización Metaheurística y Enfoques Multiobjetivo
+## Optimización Metaheurística y Enfoques Multiobjetivo
 
 Una vez resuelta la capa semántica, la evaluación simultánea de miles de recetas frente a múltiples restricciones (disponibilidad de insumos, cotas temporales, perfiles macro-nutricionales y niveles de dificultad) constituye un problema de optimización combinatoria de alta complejidad. 
 
@@ -54,7 +54,7 @@ La aproximación metodológica convencional consiste en agregar linealmente todo
 
 Para resolver este dilema de manera eficiente sin incurrir en costes computacionales prohibitivos, la literatura avala el uso de algoritmos de Búsqueda Local Estocástica, técnicas de Simulated Annealing basadas en los equilibrios probabilísticos de Boltzmann, y estrategias de optimización multiobjetivo real apoyadas en el concepto de la dominancia de Pareto. Este TFG se posiciona en esta última frontera metodológica, evaluando comparativamente cómo operan dichas metaheurísticas stocásticas sobre espacios continuos para devolver un catálogo equilibrado de soluciones Pareto-óptimas adaptadas al hogar.
 
-#Enfoque metodológico y recorrido experimental
+# Enfoque metodológico y recorrido experimental
 
 El presente trabajo no aborda el desarrollo del asistente culinario como una implementación lineal de técnicas previamente cerradas, sino como un proceso de exploración experimental progresiva en el que cada fase metodológica surge como respuesta a las limitaciones observadas en la etapa anterior. Desde esta perspectiva, el objetivo no consiste únicamente en construir un recomendador funcional, sino en analizar qué combinación de estrategias de procesamiento del lenguaje natural, representación semántica y optimización resulta más adecuada para el dominio gastronómico.
 
@@ -70,7 +70,7 @@ Finalmente, la última fase incorpora una exploración de modelos contextuales b
 
 En conjunto, el recorrido del trabajo sigue una lógica encadenada: construir el dato, normalizarlo, representarlo semánticamente, explotar esa representación mediante algoritmos de recomendación y, finalmente, explorar arquitecturas contextuales como vía de mejora. Esta secuencia da coherencia al conjunto de experimentos desarrollados y constituye el hilo conductor de la investigación.
 
-Estructura del documento
+# Estructura del documento
 
 La memoria se organiza en seis capítulos principales, además de las conclusiones finales. Tras este capítulo introductorio, el Capítulo 2 presenta la planificación del proyecto, la distribución temporal del trabajo y la infraestructura tecnológica empleada durante el desarrollo.
 
